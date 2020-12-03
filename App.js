@@ -3,15 +3,21 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer}  from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import Homepage from './components/Homepage'
+import Listpage from './components/Listpage'
+import Recipepage from './components/Recipepage'
 
 const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+   <Stack.Navigator>
+     <Stack.Screen name="Homepage" component={Homepage} />
+     <Stack.Screen name="Listpage" component={Listpage} />
+     <Stack.Screen name="Recipepage" component={Recipepage} />
+   </Stack.Navigator>
+  </NavigationContainer>
   );
 }
 
