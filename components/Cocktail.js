@@ -41,7 +41,6 @@ export default function Event(props) {
         >
           {title}
         </Text>
-        <Text>{props.item.strCategory}</Text>
       </View>
     </View>
   );

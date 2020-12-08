@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Alert } from 'react-native';
 import { SearchBar, Button } from 'react-native-elements'
+import HighlightDrink from "./Highlights"
 
 export default function Homepage({navigation}) {
     const [ingredient, setIngredient] = React.useState('')
@@ -32,6 +33,9 @@ export default function Homepage({navigation}) {
           onPress={getCocktail}
           title="search"       
           />
+          <View>
+            <HighlightDrink></HighlightDrink>
+          </View>
       </View>
 
   )
