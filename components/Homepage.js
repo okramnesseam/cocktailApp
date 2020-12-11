@@ -12,13 +12,13 @@ export default function Homepage({navigation}) {
         fetch('https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=' + ingredient)
         .then((response) => response.json())
     .then((responseData) => {
-      setDrinks(responseData.drinks)
+      navigation.navigate("Listpage", { data: responseData.drinks })
+      // setDrinks(responseData.drinks)
       console.log(drinks)
     })
     .catch((error) => {
       Alert.alert('Error', error)
     })
-    navigation.navigate("Listpage", { data: drinks })
   }
 
   return (

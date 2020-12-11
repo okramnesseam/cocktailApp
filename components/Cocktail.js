@@ -9,15 +9,7 @@ export default function Event(props) {
 
   const navigation = useNavigation();
 
-  let image;
-  if (props.item.strDrinkThumb) {
-    image = { uri: props.item.strDrinkThumb };
-  } else {
-    image = {
-      uri:
-        "http://kasperstromman.com/wp-content/uploads/2017/05/HelsinkiIlme.jpg",
-    };
-  }
+  let image = { uri: props.item.strDrinkThumb }
 
   let title = props.item.strDrink
 

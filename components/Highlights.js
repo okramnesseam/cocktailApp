@@ -1,14 +1,11 @@
 import React, { useEffect } from "react";
 import { Card, Text, Icon } from 'react-native-elements'
-import {
-    Alert,
-    Button
-} from "react-native";
+import { Alert, Button, View } from "react-native";
 
 export default function Highlights() {
 
     const [randomDrink, setRandomDrink] = React.useState()
-    let image = { uri: randomDrink.strDrinkThumb };
+    const [isReady, setReady] = React.useState(false)
 
 
     function fetchData() {
@@ -18,6 +15,7 @@ export default function Highlights() {
                 setRandomDrink(responseData.drinks[0])
                 console.log(randomDrink)
             })
+            .then(data => setReady(true))
             .catch((error) => {
                 Alert.alert('Error', error.message)
             })
@@ -26,15 +24,18 @@ export default function Highlights() {
         fetchData();
     }, []);
 
+      let image = { uri: randomDrink.strDrinkThumb }
+
+    if (isReady === true) {
         return (
             <Card>
                 <Card.Title>
                     {randomDrink.strDrink}
                 </Card.Title>
                 <Card.Divider/>
-                <Card.Image 
+                  <Card.Image 
                     source= {image}
-                />
+                />  
                 <Text style={{marginBottom: 10}}>
                     {randomDrink.strInstructions}
                 </Text>
@@ -46,6 +47,12 @@ export default function Highlights() {
                     color="black"
                 />
             </Card>
-        )
+        ) } else {
+            return(
+                <Card>
+                    <Text>Loading...</Text>
+                </Card>
+            )
+        }
     }
 
