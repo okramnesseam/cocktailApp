@@ -6,10 +6,11 @@ export default function RecipeScreen({ route, navigation }) {
 
     const { propsItem } = route.params;
     let ID = propsItem.item.idDrink;
-    const [isReady, setReady] = useState(false)
-    const [recipeById, setRecipeById] = useState()
+    console.log(ID)
+    const [isReady, setReady] = React.useState(false)
+    const [recipeById, setRecipeById] = React.useState()
     
-    // let image = { uri: propsItem.item.strDrinkThumb };
+    let image = { uri: propsItem.item.strDrinkThumb };
 
     function fetchRecipeById(){
         fetch('https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=' + ID)
@@ -42,7 +43,7 @@ export default function RecipeScreen({ route, navigation }) {
     } else {
       return(
         <View style={styles.RecipepageContainer}>
-            <Text>loading...</Text>
+            <Text>Loading...</Text>
         </View>
       )
     }
