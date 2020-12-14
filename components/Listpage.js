@@ -1,25 +1,15 @@
-import {StatusBar} from "expo-status-bar";
 import React from "react";
 import Cocktail from './Cocktail'
 
-import {
-    StyleSheet,
-    View,
-    FlatList,
-    Alert,
-    ActivityIndicator,
-} from "react-native";
+import { StyleSheet, View, FlatList } from "react-native";
 
-export default function Recipepage({navigation, route}) {
+export default function Recipepage({route}) {
     const [cocktailList, setCocktailList] = React.useState([]);
-    const [listItemsKeep, setListItemsKeep] = React.useState([]);
-    const [isReady, setReady] = React.useState(true);
 
     const { data } = route.params
 
     React.useEffect(() => {
         setCocktailList(data)
-        setListItemsKeep(data)
       }, [])
 
     const renderItem = (item) => {

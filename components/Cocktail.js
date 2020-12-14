@@ -5,6 +5,7 @@ import { TouchableHighlight } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 
 export default function Event(props) {
+  
   let propsItem = props;
 
   const navigation = useNavigation();
@@ -37,6 +38,7 @@ export default function Event(props) {
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   DrinksContainer: {
     flex: 1,

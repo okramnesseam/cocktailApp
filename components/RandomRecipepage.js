@@ -1,35 +1,15 @@
-import React, { useEffect } from 'react';
-import { View, Text, StyleSheet, Image, Alert } 
+import React from 'react';
+import { View, Text, StyleSheet, Image } 
 from 'react-native';
 
 export default function RecipeScreen({ route }) {
 
-    const { propsItem } = route.params;
-    let ID = propsItem.item.idDrink;
-    const [isReady, setReady] = React.useState(false)
-    const [recipeById, setRecipeById] = React.useState()
-    
-    let image = { uri: propsItem.item.strDrinkThumb };
+    const { data } = route.params;
+    let ID = data.idDrink;
+    let image = { uri: data.strDrinkThumb };
 
-    function fetchRecipeById(){
-        fetch('https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=' + ID)
-        .then((response) => response.json())
-        .then((responseData) => {
-          setRecipeById(responseData.drinks[0])
-        })
-        .then(data => setReady(true))
-        .catch((error) => {
-          Alert.alert('Error', error.message)
-        });
-    }
-
-    useEffect(() => {
-        fetchRecipeById();
-      }, []); 
-
-      if (isReady === true) {
       let ingredients = []
-        for (let entry of Object.entries(recipeById)) {
+        for (let entry of Object.entries(data)) {
             if (entry[0].includes("strIngredient")) {
                 ingredients.push(entry[1]);
             }
@@ -37,7 +17,7 @@ export default function RecipeScreen({ route }) {
         const cleanedIngrArray =  ingredients.filter(e =>  e);
 
         let measures = []
-        for (let entry of Object.entries(recipeById)) {
+        for (let entry of Object.entries(data)) {
           if (entry[0].includes("strMeasure")) {
             measures.push(entry[1])
           }
@@ -53,7 +33,7 @@ export default function RecipeScreen({ route }) {
                 progressiveRenderingEnabled={true}
               />
             <View style={styles.Infobox}>
-              <Text style={{padding: 10}}>{recipeById.strDrink}</Text>
+              <Text style={{padding: 10}}>{data.strDrink}</Text>
               <View style={{flexDirection: 'row'}}>
               <View>
                 { cleanedIngrArray.map((item, key) => ( 
@@ -66,18 +46,12 @@ export default function RecipeScreen({ route }) {
                 )}
               </View>
               </View>
-              <Text style={{padding: 10}}>{recipeById.strInstructions}</Text>
+              <Text style={{padding: 10}}>{data.strInstructions}</Text>
               </View>
 
           </View>
       )
-    } else {
-      return(
-        <View style={styles.RecipepageContainer}>
-            <Text>Loading...</Text>
-        </View>
-      )
-    }
+    
 }
 
 const styles = StyleSheet.create({
